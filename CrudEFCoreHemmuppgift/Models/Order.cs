@@ -13,7 +13,7 @@ public class Order
     public DateTime OrderDate { get; set; }
 
     [Required,  StringLength(50)]
-    public string Status { get; set; } = null!;
+    public OrderStatus Status { get; set; }
     
     public decimal TotalAmount => OrderRows.Sum(r => r.UnitPrice * r.Quantity);
     

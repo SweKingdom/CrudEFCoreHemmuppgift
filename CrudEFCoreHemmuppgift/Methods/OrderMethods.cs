@@ -46,6 +46,46 @@ public static class OrderMethods
         
     }
 
+    
+    public static async Task OrderByStatusAsync(OrderStatus status)
+    {
+        using var db = new ShopContext();
+        var orders = await db.Orders
+            .Include(o => o.OrderRows)
+            .Include(o => o.Customer)
+            .Where(o => o.Status == status)
+            .OrderBy(o => o.OrderDate)
+            .ToListAsync();
+        
+        Console.WriteLine("OrderId | OrderDate | Status | CustomerName | TotalAmount");
+        foreach (var order in orders)
+        {
+            Console.WriteLine($"{order.OrderId} | {order.OrderDate} | {order.Status} | {order.Customer.Name} | {order.TotalAmount}");
+        }
+        
+    }
+
+
+    
+    public static async Task OrderByCustomerAsync(int customerId)
+    {
+        using var db = new ShopContext();
+        var orders = await db.Orders
+            .Include(o => o.OrderRows)
+            .Include(o => o.Customer)
+            .Where(o => o.CustomerId == customerId)
+            .OrderBy(o => o.OrderDate)
+            .ToListAsync();
+
+
+        Console.WriteLine("OrderId | OrderDate | Status | CustomerName | TotalAmount");
+        foreach (var order in orders)
+        {
+            Console.WriteLine($"{order.OrderId} | {order.OrderDate} | {order.Status} | {order.Customer.Name} | {order.TotalAmount}");
+        }
+
+    }
+    
     public static async Task AddOrder() // Change so Customer List function
     {
         using var  db = new ShopContext();
@@ -70,7 +110,7 @@ public static class OrderMethods
         {
             CustomerId = customerId,
             OrderDate = DateTime.Now,
-            Status = "Pending"
+            Status = OrderStatus.Pending,
         };
         
         // Add orderRows

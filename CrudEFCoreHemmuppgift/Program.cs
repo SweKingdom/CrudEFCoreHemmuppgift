@@ -3,6 +3,8 @@ using CrudEFCoreHemmuppgift.Models;
 using Microsoft.EntityFrameworkCore;
 
 
+
+
 Console.WriteLine("DB: " + Path.Combine(AppContext.BaseDirectory, "shop.db"));
 using (var db = new ShopContext())
 {
@@ -29,7 +31,7 @@ while (true)
 {
     Console.WriteLine("\nCommands: Customers | +customer | EditCustomer <Id> | DeleteCustomer <Id>");
     Console.WriteLine("Commands: Orders | OrderDetail <id> | AddOrder");
-    Console.WriteLine("Commands: ListProducts");
+    Console.WriteLine("Commands: ListProducts | OrderCustomerSearch <id> | obs <status> ");
     Console.WriteLine(">");
     var line = Console.ReadLine()?.Trim() ?? string.Empty;
     // Hoppa över tomma rader
@@ -94,7 +96,31 @@ while (true)
         case "listproducts":
             await ProductMethods.ListProductsAsync();
             break;
-        
+        case "ordercustomersearch":
+            if (parts.Length < 2 || !int.TryParse(parts[1], out var oId))
+            {
+                Console.WriteLine("Usage: OrderCustomerSearch <id>");
+                break;
+            }
+            await OrderMethods.OrderByCustomerAsync(oId);
+            break;
+        case "obs":
+        {
+            if (parts.Length < 2)
+            {
+                Console.WriteLine("Usage: obs <status>");
+                break;
+            }
+
+            if (!Enum.TryParse<OrderStatus>(parts[1], true, out var status))
+            {
+                Console.WriteLine("Invalid status. Valid options: Pending - 0, Paid - 1, Shipped - 2");
+                break;
+            }
+
+            await OrderMethods.OrderByStatusAsync(status);
+            break;
+        }
         case "exit":
             return;
 

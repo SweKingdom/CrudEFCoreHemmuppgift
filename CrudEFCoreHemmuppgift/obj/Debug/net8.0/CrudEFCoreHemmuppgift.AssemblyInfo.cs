@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CrudEFCoreHemmuppgift")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07bcf2c16df515b6184cd44e1b360443090d08c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fcefdf6d1b4e75cf0208dbbe7d78c8d13fc7ddac")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrudEFCoreHemmuppgift")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrudEFCoreHemmuppgift")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
