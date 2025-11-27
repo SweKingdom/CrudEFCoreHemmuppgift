@@ -15,8 +15,7 @@ public class Order
     [Required,  StringLength(50)]
     public string Status { get; set; } = null!;
     
-    [Required]
-    public decimal TotalAmount { get; set; }
+    public decimal TotalAmount => OrderRows.Sum(r => r.UnitPrice * r.Quantity);
     
     public Customer? Customer { get; set; }
 
