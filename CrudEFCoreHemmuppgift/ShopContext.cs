@@ -39,7 +39,6 @@ public class ShopContext : DbContext
 
                 e.Property(x => x.OrderDate);
                 e.Property(x => x.Status).IsRequired().HasMaxLength(50);
-                e.Property(x => x.TotalAmount).IsRequired();
 
                 e.HasOne(x => x.Customer)
                     .WithMany(x => x.Orders)
@@ -73,8 +72,6 @@ public class ShopContext : DbContext
             e.Property(x => x.ProductName)
                 .IsRequired()
                 .HasMaxLength(100);
-            e.Property(x => x.Description)
-                .HasMaxLength(250);
             e.Property(x => x.Pris)
                 .IsRequired();
         });
